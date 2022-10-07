@@ -16,11 +16,11 @@ inline std::string GetNameOfEntity(int n)
   {
   case ent_Miner_Bob:
 
-    return "Senior programmer";
+    return "Junior programmer";
 
   case ent_Elsa:
     
-    return "Junior programmer"; 
+    return "Senior programmer"; 
 
   default:
 
