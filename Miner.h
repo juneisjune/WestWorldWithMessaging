@@ -53,6 +53,8 @@ private:
 
   //the higher the value, the more tired the miner
   int                   m_iFatigue;
+  int valueOfDoSideProject;
+  int valueWhenFinishingSiedProject;
 
 public:
 
@@ -61,6 +63,8 @@ public:
                           m_iMoneyInBank(0),
                           m_iThirst(0),
                           m_iFatigue(0),
+                          valueOfDoSideProject(0),
+                          valueWhenFinishingSiedProject(0),
                           BaseGameEntity(id)
                                
   {
@@ -94,11 +98,17 @@ public:
   void          AddToGoldCarried(int val);
   bool          PocketsFull()const{return m_iGoldCarried >= MaxNuggets;}
 
-  bool          Fatigued()const;
+  int           Fatigued();
   void          DecreaseFatigue(){m_iFatigue -= 1;}
   void          IncreaseFatigue(){m_iFatigue += 1;}
 
-  int           Wealth()const{return m_iMoneyInBank;}
+  int           GetDoSideProject(){ return valueOfDoSideProject; }
+  void          IncreasSideProject(){ valueOfDoSideProject += 1; }
+
+  int           WhenFinishingProject() { return valueWhenFinishingSiedProject; }
+  void          IncreaseWhenFinishingProject() { valueWhenFinishingSiedProject += 1; }
+
+  int           Wealth(){return m_iMoneyInBank;}
   void          SetWealth(int val){m_iMoneyInBank = val;}
   void          AddToWealth(int val);
 

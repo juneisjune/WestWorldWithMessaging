@@ -34,7 +34,7 @@ void EnterMineAndDigForNugget::Enter(Miner* pMiner)
   //change location to the gold mine
   if (pMiner->Location() != goldmine)
   {
-    cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " << " Walking to the office for programming ";//Walkin' to the goldmine
+    cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " << "Walking to the office for programming ";//Walkin' to the goldmine
 
     pMiner->ChangeLocation(goldmine);
   }
@@ -69,7 +69,7 @@ void EnterMineAndDigForNugget::Execute(Miner* pMiner)
 void EnterMineAndDigForNugget::Exit(Miner* pMiner)
 {
   cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " 
-       << " I have headache i can't do anymore ";//Ah'm leavin' the goldmine with mah pockets full o' sweet gold
+       << "I have headache i can't do anymore ";//Ah'm leavin' the goldmine with mah pockets full o' sweet gold
 }
 //I can't solve this error. I'm going to ask my senior
 
@@ -108,13 +108,13 @@ void VisitBankAndDepositGold::Execute(Miner* pMiner)
   pMiner->SetGoldCarried(0);
 
   cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
-      << " I going to sleep few minutes" << pMiner->Wealth();//Depositing gold. Total savings now: 
+      << "I going to sleep few minutes" << pMiner->Wealth();//Depositing gold. Total savings now: 
 
   //wealthy enough to have a well earned rest?
   if (pMiner->Wealth() >= ComfortLevel)
   {
     cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " 
-         << " WooHoo! Headache is gone. Go back to office for work";//WooHoo! Rich enough for now. Back home to mah li'lle lady
+         << "WooHoo! Headache is gone. Go back to office for work";//WooHoo! Rich enough for now. Back home to mah li'lle lady
       
     pMiner->GetFSM()->ChangeState(GoHomeAndSleepTilRested::Instance());      
   }
@@ -151,37 +151,56 @@ void GoHomeAndSleepTilRested::Enter(Miner* pMiner)
 {
   if (pMiner->Location() != shack)
   {
-    cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " << "Walkin' home";
-
+    cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " 
+        << "I have to go home because my working hours are over, \n                   but I have to go for side projects with a senior programmer";
+    //Walkin' home
     pMiner->ChangeLocation(shack); 
 
     //let the wife know I'm home
     Dispatch->DispatchMessage(SEND_MSG_IMMEDIATELY, //time delay
                               pMiner->ID(),        //ID of sender
-                              ent_Elsa,            //ID of recipient
-                              Msg_HiHoneyImHome,   //the message
+                              ent_Senior_Programmer,            //ID of recipient
+                                Msg_StartSideProject,   //the message
                               NO_ADDITIONAL_INFO);    
   }
 }
-
+//int i = 0;
+//int z = 0;
 void GoHomeAndSleepTilRested::Execute(Miner* pMiner)
-{ 
+{
+    
   //if miner is not fatigued start to dig for nuggets again.
   if (!pMiner->Fatigued())
   {
      cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " 
-          << " OMG :( It's already morning. Time to work for payback an apartment loan";//All mah fatigue has drained away. Time to find more gold!
+          << "OMG :( It's already morning. Time to work for payback an apartment loan";//All mah fatigue has drained away. Time to find more gold!
 
      pMiner->GetFSM()->ChangeState(EnterMineAndDigForNugget::Instance());
   }
-
+  else if (pMiner->GetDoSideProject() < 2)
+  {
+      pMiner->IncreaseFatigue();
+      cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " << "Doing side project ";
+      pMiner->IncreasSideProject();
+      //i++;
+      goto out;
+      
+  }
+  
   else 
   {
     //sleep
     pMiner->DecreaseFatigue();
-
-    cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " << "ZZZZ... ";
+    if (pMiner->WhenFinishingProject() == 0)
+    {
+        cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " 
+            << "I arrived home and took a shower. Now I'm going to sleep";
+        pMiner->IncreaseWhenFinishingProject();
+    }
+            cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " << "ZZZZ...";
   } 
+out:
+  {}
 }
 
 void GoHomeAndSleepTilRested::Exit(Miner* pMiner)
@@ -195,7 +214,7 @@ bool GoHomeAndSleepTilRested::OnMessage(Miner* pMiner, const Telegram& msg)
 
    switch(msg.Msg)
    {
-   case Msg_StewReady:
+   case Msg_FinishSideProject:
 
      cout << "\nMessage handled by " << GetNameOfEntity(pMiner->ID()) 
      << " at time: " << Clock->GetCurrentTime();
@@ -203,8 +222,8 @@ bool GoHomeAndSleepTilRested::OnMessage(Miner* pMiner, const Telegram& msg)
      SetTextColor(FOREGROUND_RED|FOREGROUND_INTENSITY);
 
      cout << "\n" << GetNameOfEntity(pMiner->ID()) 
-          << ": Okay Hun, ahm a comin'!";
-
+          << ": Oh yes, I did everything. ";
+     //Okay Hun, ahm a comin'!
      pMiner->GetFSM()->ChangeState(EatStew::Instance());
       
      return true;
@@ -267,7 +286,8 @@ EatStew* EatStew::Instance()
 
 void EatStew::Enter(Miner* pMiner)
 {
-  cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " << "Smells Reaaal goood Elsa!";
+   // Smells Reaaal goood Elsa!
+    cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " << "Can i go home?";
 }
 
 void EatStew::Execute(Miner* pMiner)

@@ -28,7 +28,10 @@ void Miner::AddToWealth(const int val)
 {
   m_iMoneyInBank += val;
 
-  if (m_iMoneyInBank < 0) m_iMoneyInBank = 0;
+  if (m_iMoneyInBank < 0)
+  {
+      m_iMoneyInBank = 0;
+  }
 }
 
 bool Miner::Thirsty()const
@@ -38,9 +41,9 @@ bool Miner::Thirsty()const
   return false;
 }
 
-bool Miner::Fatigued()const
+int Miner::Fatigued()
 {
-  if (m_iFatigue > TirednessThreshold)
+  if (m_iFatigue > TirednessThreshold) //현재 피로가 기준점보다 크다면
   {
     return true;
   }
