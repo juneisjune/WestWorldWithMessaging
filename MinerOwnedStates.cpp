@@ -32,11 +32,11 @@ void EnterMineAndDigForNugget::Enter(Miner* pMiner)
 {
   //if the miner is not already located at the goldmine, he must
   //change location to the gold mine
-  if (pMiner->Location() != goldmine)
+  if (pMiner->Location() != office)
   {
-    cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " << "Walking to the office for programming ";//Walkin' to the goldmine
+    cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " << "Walking to office for programming ";//Walkin' to the goldmine
 
-    pMiner->ChangeLocation(goldmine);
+    pMiner->ChangeLocation(office);
   }
 }
 
@@ -91,11 +91,11 @@ VisitBankAndDepositGold* VisitBankAndDepositGold::Instance()
 void VisitBankAndDepositGold::Enter(Miner* pMiner)
 {  
   //on entry the miner makes sure he is located at the bank
-  if (pMiner->Location() != bank)
+  if (pMiner->Location() != restRoom)
   {
     cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " << "Way to rest room is too far";//Goin' to the bank. Yes siree
 
-    pMiner->ChangeLocation(bank);
+    pMiner->ChangeLocation(restRoom);
   }
 }
 //Way to senior programmer office
@@ -108,7 +108,7 @@ void VisitBankAndDepositGold::Execute(Miner* pMiner)
   pMiner->SetGoldCarried(0);
 
   cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
-      << "I going to sleep few minutes" << pMiner->Wealth();//Depositing gold. Total savings now: 
+      << "I going to sleep few minutes"/* << pMiner->Wealth()*/;//Depositing gold. Total savings now: 
 
   //wealthy enough to have a well earned rest?
   if (pMiner->Wealth() >= ComfortLevel)
@@ -149,12 +149,12 @@ GoHomeAndSleepTilRested* GoHomeAndSleepTilRested::Instance()
 
 void GoHomeAndSleepTilRested::Enter(Miner* pMiner)
 {
-  if (pMiner->Location() != shack)
+  if (pMiner->Location() != sideproject)
   {
     cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " 
         << "I have to go home because my working hours are over, \n                   but I have to go for side projects with a senior programmer";
     //Walkin' home
-    pMiner->ChangeLocation(shack); 
+    pMiner->ChangeLocation(sideproject);
 
     //let the wife know I'm home
     Dispatch->DispatchMessage(SEND_MSG_IMMEDIATELY, //time delay
@@ -219,7 +219,7 @@ bool GoHomeAndSleepTilRested::OnMessage(Miner* pMiner, const Telegram& msg)
      cout << "\nMessage handled by " << GetNameOfEntity(pMiner->ID()) 
      << " at time: " << Clock->GetCurrentTime();
 
-     SetTextColor(FOREGROUND_RED|FOREGROUND_INTENSITY);
+     SetTextColor(FOREGROUND_BLUE|FOREGROUND_INTENSITY);
 
      cout << "\n" << GetNameOfEntity(pMiner->ID()) 
           << ": Oh yes, I did everything. ";
@@ -244,9 +244,9 @@ QuenchThirst* QuenchThirst::Instance()
 
 void QuenchThirst::Enter(Miner* pMiner)
 {
-  if (pMiner->Location() != saloon)
+  if (pMiner->Location() != meatingRoom)
   {    
-    pMiner->ChangeLocation(saloon);
+    pMiner->ChangeLocation(meatingRoom);
 
     cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " << "The meeting is start soon, i need to hurry up";
   }//Boy, ah sure is thusty! Walking to the saloon

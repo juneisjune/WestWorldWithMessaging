@@ -58,7 +58,7 @@ private:
 
 public:
 
-  Miner(int id):m_Location(shack),
+  Miner(int id):m_Location(sideproject),
                           m_iGoldCarried(0),
                           m_iMoneyInBank(0),
                           m_iThirst(0),

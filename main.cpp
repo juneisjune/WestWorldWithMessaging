@@ -23,20 +23,20 @@ int main()
   srand((unsigned) time(NULL));
 
   //create a miner
-  Miner* Bob = new Miner(ent_Miner_Bob);
+  Miner* Junior = new Miner(ent_Junior_Programmer);
 
   //create his wife
-  MinersWife* Elsa = new MinersWife(ent_Elsa);
+  MinersWife* Senior = new MinersWife(ent_Senior_Programmer);
 
   //register them with the entity manager
-  EntityMgr->RegisterEntity(Bob);
-  EntityMgr->RegisterEntity(Elsa);
+  EntityMgr->RegisterEntity(Junior);
+  EntityMgr->RegisterEntity(Senior);
 
   //run Bob and Elsa through a few Update calls
   for (int i=0; i<30; ++i)
   { 
-    Bob->Update();
-    Elsa->Update();
+    Junior->Update();
+    Senior->Update();
 
     //dispatch any delayed messages
     Dispatch->DispatchDelayedMessages();
@@ -45,8 +45,8 @@ int main()
   }
 
   //tidy up
-  delete Bob;
-  delete Elsa;
+  delete Junior;
+  delete Senior;
 
   //wait for a keypress before exiting
   PressAnyKeyToContinue();

@@ -21,7 +21,7 @@
 #include "fsm/StateMachine.h"
 #include "misc/Utils.h"
 
-¤·
+
 
 class MinersWife : public BaseGameEntity
 {
@@ -38,7 +38,7 @@ private:
 
 public:
 
-  MinersWife(int id):m_Location(shack),
+  MinersWife(int id):m_Location(sideproject),
                      m_bCooking(false),
                      BaseGameEntity(id)
                                         

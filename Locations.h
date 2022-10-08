@@ -4,10 +4,10 @@
 
 enum location_type
 {
-  shack,
-  goldmine,
-  bank,
-  saloon
+  sideproject,
+  office,
+  restRoom,
+  meatingRoom
 };
 
 //uncomment this to send the output to a text file
