@@ -1,4 +1,4 @@
-#ifndef MINERSWIFE_H
+    #ifndef MINERSWIFE_H
 #define MINERSWIFE_H
 //------------------------------------------------------------------------
 //
@@ -21,7 +21,7 @@
 #include "fsm/StateMachine.h"
 #include "misc/Utils.h"
 
-
+¤·
 
 class MinersWife : public BaseGameEntity
 {
