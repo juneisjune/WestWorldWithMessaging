@@ -172,7 +172,4 @@ public:
   virtual bool OnMessage(Miner* agent, const Telegram& msg);
 };
 
-
-
-
 #endif

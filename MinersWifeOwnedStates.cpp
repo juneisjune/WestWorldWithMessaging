@@ -75,7 +75,12 @@ DoHouseWork* DoHouseWork::Instance()
 
 void DoHouseWork::Enter(MinersWife* wife)
 {
-  cout << "\n" << GetNameOfEntity(wife->ID()) << ": I still have a lots of things to do";
+   
+    
+        cout << "\n" << GetNameOfEntity(wife->ID()) << ": I still have a lots of things to do";
+     
+    
+ 
 }
 
 
@@ -209,6 +214,8 @@ bool CookStew::OnMessage(MinersWife* wife, const Telegram& msg)
       SetTextColor(FOREGROUND_GREEN|FOREGROUND_INTENSITY);
       cout << "\n" << GetNameOfEntity(wife->ID()) << ": Did you finish things to do of side project?";
       //StewReady! Lets eat
+
+
 
       //let hubby know the stew is ready
       Dispatch->DispatchMessage(SEND_MSG_IMMEDIATELY,

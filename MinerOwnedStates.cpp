@@ -111,7 +111,7 @@ void VisitBankAndDepositGold::Execute(Miner* pMiner)
       << "I going to sleep few minutes"/* << pMiner->Wealth()*/;//Depositing gold. Total savings now: 
 
   //wealthy enough to have a well earned rest?
-  if (pMiner->Wealth() >= ComfortLevel)
+  if (pMiner->Wealth() >= HeadacheLevel)
   {
     cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " 
          << "WooHoo! Headache is gone. Go back to office for work";//WooHoo! Rich enough for now. Back home to mah li'lle lady
@@ -292,14 +292,16 @@ void EatStew::Enter(Miner* pMiner)
 
 void EatStew::Execute(Miner* pMiner)
 {
-  cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " << "Tastes real good too!";
+  cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " << "Way to home";
+  //Tastes real good too!
 
   pMiner->GetFSM()->RevertToPreviousState();
 }
 
 void EatStew::Exit(Miner* pMiner)
 { 
-  cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " << "Thankya li'lle lady. Ah better get back to whatever ah wuz doin'";
+  cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": " << "I finished my work safely today I have to work hard tomorrow, too";
+  //Thankya li'lle lady. Ah better get back to whatever ah wuz doin'
 }
 
 

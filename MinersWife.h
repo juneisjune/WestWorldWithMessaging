@@ -34,12 +34,16 @@ private:
 
   //is she presently cooking?
   bool            m_bCooking;
+  int               seniorFatigue;
+  int               maxFatigue=5;
 
 
 public:
 
-  MinersWife(int id):m_Location(sideproject),
-                     m_bCooking(false),
+    MinersWife(int id) :m_Location(sideproject),
+        m_bCooking(false),
+        seniorFatigue(0),
+        maxFatigue(5),
                      BaseGameEntity(id)
                                         
   {
@@ -56,7 +60,7 @@ public:
 
   //this must be implemented
   void          Update();
-
+  
   //so must this
   virtual bool  HandleMessage(const Telegram& msg);
 
@@ -68,6 +72,8 @@ public:
 
   bool          Cooking()const{return m_bCooking;}
   void          SetCooking(bool val){m_bCooking = val;}
+  
+  
    
 };
 

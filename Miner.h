@@ -24,11 +24,11 @@ template <class entity_type> class State; //pre-fixed with "template <class enti
 struct Telegram;
 
 //the amount of gold a miner must have before he feels he can go home
-const int ComfortLevel       = 5;
+const int HeadacheLevel       = 5;
 //the amount of nuggets a miner can carry
 const int MaxNuggets         = 3;
 //above this value a miner is thirsty
-const int ThirstLevel        = 5;
+const int KnowLevel        = 5;
 //above this value a miner is sleepy
 const int TirednessThreshold = 5;
 
@@ -46,10 +46,10 @@ private:
   //how many nuggets the miner has in his pockets
   int                   m_iGoldCarried;
 
-  int                   m_iMoneyInBank;
+  int                   m_iHeadaheLevel;
 
   //the higher the value, the thirstier the miner
-  int                   m_iThirst;
+  int                   m_iKnow;
 
   //the higher the value, the more tired the miner
   int                   m_iFatigue;
@@ -60,8 +60,8 @@ public:
 
   Miner(int id):m_Location(sideproject),
                           m_iGoldCarried(0),
-                          m_iMoneyInBank(0),
-                          m_iThirst(0),
+                         m_iHeadaheLevel(0),
+                             m_iKnow(0),
                           m_iFatigue(0),
                           valueOfDoSideProject(0),
                           valueWhenFinishingSiedProject(0),
@@ -108,12 +108,12 @@ public:
   int           WhenFinishingProject() { return valueWhenFinishingSiedProject; }
   void          IncreaseWhenFinishingProject() { valueWhenFinishingSiedProject += 1; }
 
-  int           Wealth(){return m_iMoneyInBank;}
-  void          SetWealth(int val){m_iMoneyInBank = val;}
+  int           Wealth(){return m_iHeadaheLevel;}
+  void          SetWealth(int val){ m_iHeadaheLevel = val;}
   void          AddToWealth(int val);
 
   bool          Thirsty()const; 
-  void          BuyAndDrinkAWhiskey(){m_iThirst = 0; m_iMoneyInBank-=2;}
+  void          BuyAndDrinkAWhiskey(){ m_iKnow = 0; m_iHeadaheLevel -=2;}
 
 };
 

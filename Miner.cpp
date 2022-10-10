@@ -10,7 +10,7 @@ void Miner::Update()
 {
   SetTextColor(FOREGROUND_BLUE| FOREGROUND_INTENSITY);
 
-  m_iThirst += 1;
+  m_iKnow += 1;
   
   m_pStateMachine->Update();
 }
@@ -26,17 +26,17 @@ void Miner::AddToGoldCarried(const int val)
 
 void Miner::AddToWealth(const int val)
 {
-  m_iMoneyInBank += val;
+    m_iHeadaheLevel += val;
 
-  if (m_iMoneyInBank < 0)
+  if (m_iHeadaheLevel < 0)
   {
-      m_iMoneyInBank = 0;
+      m_iHeadaheLevel = 0;
   }
 }
 
 bool Miner::Thirsty()const
 {
-  if (m_iThirst >= ThirstLevel){return true;}
+  if (m_iKnow >= KnowLevel){return true;}
 
   return false;
 }
